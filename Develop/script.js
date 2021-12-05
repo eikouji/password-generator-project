@@ -102,22 +102,22 @@
 
         var passwordCompleted = [];
           if (confirmUpperCase) {
-            passwordCriteria.push(0);
+            getPasswordCompleted.push(0);
           }
           if (confirmLowerCase) {
-            passwordCriteria.push(1);
+            getPasswordCompleted.push(1);
           }
           if (confirmNumbers) {
-            passwordCriteria.push(2);
+            getPasswordCompleted.push(2);
           }
           if (confirmSpecial) {
-            passwordCriteria.push(3);
+            getPasswordCompleted.push(3);
           }
 
       // re-do password criteria check if no rules are selected // 
       if (passwordCompleted.length === 0) {
       alert("Error: Your password must have at least one rule selected");
-        return getPasswordCriteria();
+        return getPasswordCompleted();
       }
    
     return passwordCompleted;
@@ -127,7 +127,7 @@
    // Randomize parameters of the password, randomize character selection // //
     var passwordText = "";
     var selection = 0;
-    for (i = 0; i < passwordCriteria.length; i++) {
+    for (i = 0; i < getPasswordCompleted.length; i++) {
 
     // Generate random number to act as password character length // //
 

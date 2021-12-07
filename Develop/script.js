@@ -153,8 +153,24 @@
     };
   
 
-    // #generate element // //
+    // #generate element, to get references // //
      var generateBtn = document.querySelector("#generate");
+     var regenBtn = document.querySelector("#regen");
+
+     // re-generate button is disabled upon page load // 
+     regenBtn.disabled = true;
+
+
+     function generate() {
+       regen = false;
+       writePassword():
+       // Regenerate Button is clickable as soon as password rules are followed // 
+       regenBtn.disabled = false;
+     }
+     function regenerate() {
+       regen = true;
+       writePassword();
+     }
 
 
      // Write password to the #password input
@@ -167,6 +183,5 @@
     }
 
     // Add event listener to generate button //
-   generateBtn.addEventListener("click", writePassword);
-
-  }
+   generateBtn.addEventListener("click", generate);
+   regenBtn.addEventListener("click", regenerate);

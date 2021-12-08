@@ -8,109 +8,92 @@
 
   // Assignment code here // 
   
-  // Components of a strong password // 
-  
-  // Character amount in password between 8 and 128 characters for increased password strength // 
-  var lowerCaseLetters = ['a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v', 'w', 'x', 'y', 'z'];
-  var upperCaseLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  var numberCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-', '.', '~', '|', '<', '>', '=', '-', '_', '/', ':', ';', '?', '[', ']', '{', '}', '~'];
+  // Variables
+// Creating a low to high function to create the decimals for the characters in an ASCII table 
+// https://www.asciitable.com/
+
+var lowerCaseLetters = arrayFromLowToHigh(97, 122);
+var upperCaseLetters = arrayFromLowToHigh(65, 90);
+var numberCharacters = arrayFromLowToHigh(48, 57);
+var specialCharacters = arrayFromLowToHigh(33, 47)
+  .concat(arrayFromLowToHigh(58, 64))
+  .concat(arrayFromLowToHigh(91, 96))
+  .concat(arrayFromLowToHigh(123, 126));
 
 
-    /* var allPasswordComponents = 
-    [
-      upperCaseLetters +
-      lowerCaseLetters +
-      numberCharacters +
-      specialCharacters
-    ];
-    document.getElementById("strong password").innerHTML = allPasswordComponents;
+console.log(
+  lowerCaseLetters,
+  upperCaseLetters,
+  numberCharacters,
+  specialCharacters
+);
+// Concatenating the special character arrays as they are not consecutive decimal values in the ASCII table
 
-    take array of all allPassword Components and spit them onto the password screen somehow magically.
-    */
+function arrayFromLowToHigh(low, high) {
+  const array = [];
+  for (let i = low; i <= high; i++) {
+    array.push(i);
+  }
+  return array;
+}
+// Change the value of the low decimal value until it reaches the high value within the array
 
-  // a console log to check on all the password components // 
-  console.log (
-    upperCaseLetters,
-    lowerCaseLetters,
-    numberCharacters,
-    specialCharacters
+// Assignment Code
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
+
+function generatePassword() {
+  var passwordCharacters = [];
+
+  var passwordCharacterLength = window.prompt(
+    "Your password needs at least a length of characters from 8 - 128"
   );
-
-  // Concatenating the special character arrays in a sequential manner // 
-  function arrayFromLowToHigh(low, high) {
-    var array = [];
-    for (let i = low; i <= high; i++) {
-      array.push(i)
-    }
+  if (passwordCharacterLength < 8) {
+    passwordCharacterLength = 8;
+    alert("Default min length set to 8 characters");
+  } else if (passwordCharacterLength > 128) {
+    passwordCharacterLength = 128;
+    alert("Default max length set to 128 characters");
   }
- 
- // Assignment Code // //
- let generateBtn = document.querySelector("#generate");
+  // Setting a default length if the user sets a value less than 8 characters or more than 128 characters
 
- // Write password to the #password input //
- function writePassword() {
-   let password = generatePassword();
-   let passwordText = document.querySelector("#password");
-
-   passwordText.value = password;
- }
- 
-
-  // Define generatePassword with a function ////////
-  function generatePassword () {
-    var passwordCharacters = [];
-    
-    // Establish character amount for passwords, between 8 - 128 // //
-    var passwordCharacterLength = window.prompt(
-      "Your password needs at least 8 characters, no more than 128 characters"
-    );
-    if (passwordCharacterLength < 8) {
-      passwordCharacterLength = 8;
-      alert("Default minimum password length is 8 characters!");
-    } else if (passwordCharacterLength > 128) {
-      passwordCharacterLength = 128;
-      alert("Default max password length is 128 characters!")
-    }
-
-    // Upper Case Letter password addition // 
-    if (window.confirm("Would you like to add UPPER CASE letters to your password?")) {
-      passwordCharacters = passwordCharacters.concat(upperCaseLetters);
-      console.log(passwordCharacters);
-    }
-    // lower case letter password addition // 
-    if (window.confirm("Would you like to add lower case letters to your password?")) {
-      passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
-      console.log(passwordCharacters);
-    }
-    // Adding numbers to the password // 
-    if (window.confirm("Would you like to add numbers to your password? (1234567890")) {
-      passwordCharacters = passwordCharacters.concat(numberCharacters);
-      console.log(passwordCharacters);
-    }
-    // adding special characters to the password // 
-
-    if (window.confirm("Would you like to add special characters to your password?")) {
-      passwordCharacters = passwordCharacters.concat(specialCharacters);
-      console.log(passwordCharacters);
-    }
-
-    // Completed Password, based on what user wanted in their password ////////
-    var completedPassword = [];
+  if (window.confirm("Would you like your password to have lower case letters? ")) {
+    passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
     console.log(passwordCharacters);
-    for (let i = 0; i < passwordCharacters.length; i++) {
-      var index = Math.floor(Math.random() * passwordCharacters.length);
-      completedPassword[i] = passwordCharacters[index];
-      completedPassword[i] = String.fromCharCode(completedPassword[i]);
-    }
-
-    return completedPassword.join("");
-
   }
 
+  if (window.confirm("Would you like your password to have UPPER CASE letters?")) {
+    passwordCharacters = passwordCharacters.concat(upperCaseLetters);
+    console.log(passwordCharacters);
+  }
 
-    // Add event listener to generate button //
-   generateBtn.addEventListener("click", generate);
-  
-   // additional ideas: a log to keep previous passwords.
-   // copy-to-clipboard feature
+  if (window.confirm("Would you like your password to have numbers (1234567890)?")) {
+    passwordCharacters = passwordCharacters.concat(numberCharacters);
+    console.log(passwordCharacters);
+  }
+
+  if (window.confirm("Would you like to select special characters like =![]{}|()-_^;*:<>@#$%& ?")) {
+    passwordCharacters = passwordCharacters.concat(specialCharacters);
+    console.log(passwordCharacters);
+  }
+  // concatenating the character arrays together based on what the user selects for the password needs //
+  let completedPasswordResult = [];
+  console.log(passwordCharacters);
+  for (let i = 0; i < passwordCharacterLength; i++) {
+    var index = Math.floor(Math.random() * passwordCharacters.length);
+    completedPasswordResult[i] = passwordCharacters[index];
+    completedPasswordResult[i] = String.fromCharCode(completedPasswordResult[i]);
+  }
+
+  return completedPasswordResult.join("");
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);

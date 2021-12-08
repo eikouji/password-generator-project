@@ -11,18 +11,33 @@
   // Components of a strong password // 
   // Character amount in password between 8 and 128 characters for increased password strength // 
 
-  var characterAmount = passwordCharacterAmount()
-  var letters = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz";
-  var numbers = "123456789"
-  
-  // A Special Symbol variable to improve security/guess-ability //////////////////////////////////
-  var specialSymbol = [
-      "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", 
-      "+", "-", ".", "`", "~", "|", "<", ">", "=", "-", "_"
-     ];
+  var upperCaseLetters = arrayFromLowToHigh(65, 90)
+  var lowerCaseLetters = arrayFromLowToHigh(97, 122)
+  var numbers = arrayFromLowToHigh(48, 57);
+  var specialSymbol = arrayFromLowToHigh(33, 47)
+      .concat(arrayFromLowToHigh(58, 64))
+      .concat(arrayFromLowToHigh(91, 96));
+      ,concat(arrayFromLowToHigh(123, 126));
+
+  // a console log to check on all the password components // 
+  console.log (
+    upperCaseLetters,
+    lowerCaseLetters,
+    numbers,
+    specialSymbol
+  );
+
+
+  // Concatenating the special character arrays in a sequential manner // 
+  function arrayFromLowToHigh(low, high) {
+    var array = [];
+    for (let i = low; i <= high; i++) {
+      array.push(i)
+    }
+  }
  
  // Assignment Code // //
- let generateBtn = document.querySelector("#generateBtn");");
+ let generateBtn = document.querySelector("#generate");
 
  // Write password to the #password input //
  function writePassword() {
@@ -36,17 +51,7 @@
   // Define generatePassword with a function ////////
   function generatePassword () {
     var passwordCharacters = [];
-
-    // a console log to check that the button is working ////////
-    console.log(
-      'Generating password with ' + 
-      charactersLength + 
-      randomUppercaseLetter + 
-      randomLowerCaseLetter + 
-      randomSymbol + '. '
-      );
-
-
+    
     // Establish character amount for passwords, between 8 - 128 // //
     var passwordCharacterLength = window.prompt(
       "Your password needs at least 8 characters, no more than 128 characters"
@@ -59,154 +64,34 @@
       alert("Default max password length is 128 characters!")
     }
 
+    // Upper Case Letter password addition // 
+    if (window.confirm("Would you like to add UPPER CASE letters to your password?")) {
+      passwordCharacters = passwordCharacters.concat(upperCaseLetters);
+      console.log(passwordCharacters);
+    }
+    // lower case letter password addition // 
+    if (window.confirm("Would you like to add lower case letters to your password?")) {
+      passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
+      console.log(passwordCharacters);
+    }
+    // Adding numbers to the password // 
+    if (window.confirm("Would you like to add numbers to your password? (1234567890")) {
+      passwordCharacters = passwordCharacters.concat(numbers);
+      console.log(passwordCharacters);
+    }
 
     // Completed Password, with ALL password rules met ////////
-    var completedPassword = completedPassword();
-
-
-    var letter = letters [0]; // "A"
-    var randomLetter = letters[Math.floor(Math.random() * characters.length)]; // random letter ;)
-
-    // Generate Random Number to put in with upper case and lower case letters // //
-    var randomNumber = function() {
-      Math.floor(Math.random() * 98);
+    var completedPassword = [];
+    console.log(passwordCharacters);
+    for (let i = 0; i < passwordCharacters.length; i++) {
+      var index = Math.floor(Math.random() * passwordCharacters.length);
+      completedPassword[i] = passwordCharacters[index];
+      completedPassword[i] = String.fromCharCode(completedPassword[i]);
     }
 
+    return completedPassword.join("");
 
-
-   // Randomized selection of indicated password rules // //
-    var passwordText = "";
-    var selection = 0;
-    for (var i = 0; i < charactersLength; i++) {
-       // keep running this until landing on one of the selected rules // //
-      var selected = false;
-
-        while (!selected) {
-          var characterType = Math.floor(Math.random() * (128 - 8 + 1) ) + 8;
-         if (completedPassword.includes(characterType)) {
-          switch (characterType) {
-            case w:
-             // random number function example: function getRndInteger(min, max) {
-             // return Math.floor(Math.random() * (max - min + 1) ) + min;
-         
-            selection = Math.floor(Math.random() * (128 - 8 + 1) ) + 8;
-          
-            case x: 
-             selection = Math.floor(Math.random() * specialCharacters.length); 
-             passwordText += String.fromCharCode(selection);
-            break;
-  
-            default:
-            break;
-          }
-          selected = true;
-         }
-        }
-
-    }
-   return passwordText;
-
-  };
-
-
-
-    /* Switch example:
-   switch(expression) {
-    case x:
-      // code block
-    break;
-    case y:
-      // code block
-    break;
-    default:
-    // code block
-
-    */
-
-
-
-    // get password with p-word rules // 
-    var getPasswordCompleted = function () {
-        // make sure user has all password rules // //
-        var confirmUpperCase = confirm("Please include uppercase letters");
-        var confirmLowerCase = confirm("Please include lowercase letters");
-        var confirmNumbers = confirm("Indicate if you would like numbers in your password");
-        var confirmSpecial = confirm("Indicate if you would like special characters like !@#$% in your password");
-
-      // Make a list with a number for each rule select (numbers, lower, upper, special) //
-
-        var passwordCompleted = [];
-          if (confirmUpperCase) {
-            getPasswordCompleted.push(0);
-          }
-          if (confirmLowerCase) {
-            getPasswordCompleted.push(1);
-          }
-          if (confirmNumbers) {
-            getPasswordCompleted.push(2);
-          }
-          if (confirmSpecial) {
-            getPasswordCompleted.push(3);
-          }
-
-      // re-do password criteria check if no rules are selected // 
-      if (passwordCompleted.length === 0) {
-      alert("Error: Your password must have at least one rule selected");
-        return getPasswordCompleted();
-      }
-   
-    return passwordCompleted;
   }
-
-
-   // Randomize parameters of the password, randomize character selection // //
-    var passwordText = "";
-    var selection = 0;
-    for (i = 0; i < getPasswordCompleted.length; i++) {
-
-    // Generate random number to act as password character length // //
-
-  
-
-    var getPasswordLength = function () {
-      // Ask user to make a password with required characters amount // //
-      var passwordLength = parsInt(
-        prompt("Enter a password with 8 or more characters, max 128 in length")
-      );
-
-      // if the password is has too few or too many characters, warn user with a prompt // //
-      if(passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
-        alert("Error! You must have a password with at least 8 characters or more; 128 characters max");
-
-        return getPasswordLength();
-      }
-
-      // Display password to the page, which is the return ! // 
-     return completedPassword;
-      // a test console.log // 
-      console.log("Generated password will go here! Beep Boop");
-    };
-  
-
-    // #generate element, to get references // //
-     var generateBtn = document.querySelector("#generate");
-     var regenBtn = document.querySelector("#regen");
-
-     // re-generate button is disabled upon page load // 
-     regenBtn.disabled = true;
-
-
-     function generate() {
-       regen = false;
-       writePassword():
-       // Regenerate Button is clickable as soon as password rules are followed // 
-       regenBtn.disabled = false;
-     }
-     function regenerate() {
-       regen = true;
-       writePassword();
-     }
-
 
      // Write password to the #password input
     function writePassword() {
@@ -216,8 +101,9 @@
       passwordText.value = password;
 
     }
-    }
 
     // Add event listener to generate button //
    generateBtn.addEventListener("click", generate);
-   regenBtn.addEventListener("click", regenerate);
+  
+   // additional ideas: a log to keep previous passwords.
+   // copy-to-clipboard feature

@@ -1,27 +1,68 @@
 
   // Acceptance Needs To Be Done //////////////////////////////////
-  // 1. Prompt the User for the password criteria
+  // 1. Prompt the User for the password criteria, https://www.w3schools.com/jsref/met_win_confirm.asp
   // a. password length 8 < 128 characters long
   // b. Lowercase, uppercase, numbers, special characters //
   // 2. Validate Input //
 
 
   // Assignment code here // 
+  
+  // Components of a strong password // 
+  // Character amount in password between 8 and 128 characters for increased password strength // 
+
+  var characterAmount = passwordCharacterAmount()
+  var letters = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz";
+  var numbers = "123456789"
+  
+  // A Special Symbol variable to improve security/guess-ability //////////////////////////////////
+  var specialSymbol = [
+      "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", 
+      "+", "-", ".", "`", "~", "|", "<", ">", "=", "-", "_"
+     ];
+ 
+ // Assignment Code // //
+ let generateBtn = document.querySelector("#generateBtn");");
+
+ // Write password to the #password input //
+ function writePassword() {
+   let password = generatePassword();
+   let passwordText = document.querySelector("#password");
+
+   passwordText.value = password;
+ }
+ 
 
   // Define generatePassword with a function ////////
   function generatePassword () {
+    var passwordCharacters = [];
+
     // a console log to check that the button is working ////////
-    console.log('Generating password with ' + charactersLength + randomUppercaseLetter + randomLowerCaseLetter + randomSymbol + '. ');
+    console.log(
+      'Generating password with ' + 
+      charactersLength + 
+      randomUppercaseLetter + 
+      randomLowerCaseLetter + 
+      randomSymbol + '. '
+      );
+
 
     // Establish character amount for passwords, between 8 - 128 // //
-    var characterAmount = passwordCharacterAmount();
+    var passwordCharacterLength = window.prompt(
+      "Your password needs at least 8 characters, no more than 128 characters"
+    );
+    if (passwordCharacterLength < 8) {
+      passwordCharacterLength = 8;
+      alert("Default minimum password length is 8 characters!");
+    } else if (passwordCharacterLength > 128) {
+      passwordCharacterLength = 128;
+      alert("Default max password length is 128 characters!")
+    }
 
 
     // Completed Password, with ALL password rules met ////////
     var completedPassword = completedPassword();
 
-    // Generate letters, upper and lower case // //
-    var letters = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz";
 
     var letter = letters [0]; // "A"
     var randomLetter = letters[Math.floor(Math.random() * characters.length)]; // random letter ;)
@@ -30,12 +71,6 @@
     var randomNumber = function() {
       Math.floor(Math.random() * 98);
     }
-
-   // Generate a Special Symbol to improve security/guess-ability //////////////////////////////////
-    var specialSymbol = [
-     "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", 
-     "+", "-", ".", "`", "~", "|", "<", ">", "=", "-", "_"
-    ];
 
 
 
@@ -180,6 +215,7 @@
 
       passwordText.value = password;
 
+    }
     }
 
     // Add event listener to generate button //

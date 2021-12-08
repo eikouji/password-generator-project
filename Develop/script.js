@@ -9,24 +9,33 @@
   // Assignment code here // 
   
   // Components of a strong password // 
+  
   // Character amount in password between 8 and 128 characters for increased password strength // 
+  var lowerCaseLetters = ['a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v', 'w', 'x', 'y', 'z'];
+  var upperCaseLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  var numberCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '-', '.', '~', '|', '<', '>', '=', '-', '_', '/', ':', ';', '?', '[', ']', '{', '}', '~'];
 
-  var upperCaseLetters = arrayFromLowToHigh(65, 90)
-  var lowerCaseLetters = arrayFromLowToHigh(97, 122)
-  var numbers = arrayFromLowToHigh(48, 57);
-  var specialSymbol = arrayFromLowToHigh(33, 47)
-      .concat(arrayFromLowToHigh(58, 64))
-      .concat(arrayFromLowToHigh(91, 96));
-      ,concat(arrayFromLowToHigh(123, 126));
+
+    /* var allPasswordComponents = 
+    [
+      upperCaseLetters +
+      lowerCaseLetters +
+      numberCharacters +
+      specialCharacters
+    ];
+    document.getElementById("strong password").innerHTML = allPasswordComponents;
+
+    take array of all allPassword Components and spit them onto the password screen somehow magically.
+    */
 
   // a console log to check on all the password components // 
   console.log (
     upperCaseLetters,
     lowerCaseLetters,
-    numbers,
-    specialSymbol
+    numberCharacters,
+    specialCharacters
   );
-
 
   // Concatenating the special character arrays in a sequential manner // 
   function arrayFromLowToHigh(low, high) {
@@ -76,11 +85,17 @@
     }
     // Adding numbers to the password // 
     if (window.confirm("Would you like to add numbers to your password? (1234567890")) {
-      passwordCharacters = passwordCharacters.concat(numbers);
+      passwordCharacters = passwordCharacters.concat(numberCharacters);
+      console.log(passwordCharacters);
+    }
+    // adding special characters to the password // 
+
+    if (window.confirm("Would you like to add special characters to your password?")) {
+      passwordCharacters = passwordCharacters.concat(specialCharacters);
       console.log(passwordCharacters);
     }
 
-    // Completed Password, with ALL password rules met ////////
+    // Completed Password, based on what user wanted in their password ////////
     var completedPassword = [];
     console.log(passwordCharacters);
     for (let i = 0; i < passwordCharacters.length; i++) {
@@ -93,14 +108,6 @@
 
   }
 
-     // Write password to the #password input
-    function writePassword() {
-     var password = generatePassword();
-     var passwordText = document.querySelector("#password");
-
-      passwordText.value = password;
-
-    }
 
     // Add event listener to generate button //
    generateBtn.addEventListener("click", generate);

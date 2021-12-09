@@ -1,5 +1,5 @@
 
-  // Acceptance Needs To Be Done //////////////////////////////////
+   // Acceptance Needs To Be Done //////////////////////////////////
   // 1. Prompt the User for the password criteria, https://www.w3schools.com/jsref/met_win_confirm.asp
   // a. password length 8 < 128 characters long
   // b. Lowercase, uppercase, numbers, special characters //
